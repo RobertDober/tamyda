@@ -1,0 +1,23 @@
+<div>
+  <form phx-change="suggest" phx-submit="search">
+    <input type="text"
+           name="q"
+           value="<%= @query %>"
+           list="matches"
+           placeholder="Search..."
+           <%= if @loading, do: "readonly" %>/>
+           <datalist id="matches">
+             <%= for match <- @matches do %>
+               <option value="<%= match %>"><%= match %></option>
+             <% end %>
+           </datalist>
+           <%= if @result do %><pre><%= @result %></pre><% end %>
+  </form>
+
+  <div class="selected-tags">
+    <% for tag <- @selected_tags do %>
+      <span><%= tag %></span>
+    <% end %>
+  </div>
+
+</div>

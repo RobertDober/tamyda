@@ -18,7 +18,8 @@ defmodule TamydaWeb.Router do
   scope "/", TamydaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live "/", TamydaLive
   end
 
   # Other scopes may use custom stacks.
