@@ -4,19 +4,24 @@
            name="q"
            value="<%= @query %>"
            list="matches"
-           placeholder="Search..."
-           <%= if @loading, do: "readonly" %>/>
+           placeholder="Search..."/>
            <datalist id="matches">
              <%= for match <- @matches do %>
                <option value="<%= match %>"><%= match %></option>
              <% end %>
            </datalist>
-           <%= if @result do %><pre><%= @result %></pre><% end %>
+           <!-- TODO: Remove following <pre> -->
+           <pre><%= inspect(@matches) %></pre>
   </form>
 
   <div class="selected-tags">
-    <% for tag <- @selected_tags do %>
-      <span><%= tag %></span>
+    <%= for tag <- @selected_tags do %>
+      <input
+        type="button"
+        value="<%= tag %>"
+        class=".button-small" 
+        phx-click="remove-tag"
+        phx-value="<%= tag %>"></button>
     <% end %>
   </div>
 

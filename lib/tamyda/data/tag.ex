@@ -1,10 +1,12 @@
 defmodule Tamyda.Data.Tag do
   
-  defstruct [tag: ""]
+  defstruct [id: 0, tag: ""]
 
   def list_tags do
-    for tag <- ~w{alpha beta gamma},
-      do: struct(__MODULE__, tag: tag)
+    names = ~w{alpha beta gamma delta epsilon zeta iota kappa}
+    for {name, id} <-  Enum.zip(names, Stream.iterate(1, &(&1+1))) do
+      struct(__MODULE__, id: id, tag: name)
+    end
   end
 
   def find_tag(query) do
