@@ -1,10 +1,17 @@
 <div>
   <form phx-change="suggest" phx-submit="search">
-    <input type="text"
+    <input id="description"
+           type="text"
+           name="desc"
+           value="<%= @desc %>"
+           placeholder="Search in descriptions..."/>
+    <label for="tags">Tags:</label>
+    <input id="tags"
+           type="text"
            name="q"
            value="<%= @query %>"
            list="matches"
-           placeholder="Search..."/>
+           placeholder="Tags..."/>
            <datalist id="matches">
              <%= for match <- @matches do %>
                <option value="<%= match %>"><%= match %></option>
@@ -12,6 +19,7 @@
            </datalist>
            <!-- TODO: Remove following <pre> -->
            <pre><%= inspect(@matches) %></pre>
+           <input type="submit" value="Search"/>
   </form>
 
   <div class="selected-tags">

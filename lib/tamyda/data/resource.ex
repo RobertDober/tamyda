@@ -1,4 +1,14 @@
 defmodule Tamyda.Data.Resource do
+
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "resources" do
+    field :short, :string
+    field :long, :string
+    field :url, :string
+
+    timestamps()
+  end
   
-  defstruct [id: 0, short: "", long: "λ", url: "http://wikipedia.org"]
 end

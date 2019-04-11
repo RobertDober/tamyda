@@ -2,10 +2,11 @@ defmodule TamydaWeb.TamydaLive do
 
   use Phoenix.LiveView
   alias Tamyda.Data.Tag
+  alias TamydaWeb.TamydaLive.Search, as: S
 
   def mount(_session, socket) do
     IO.inspect socket
-    {:ok, assign(socket, query: nil, matches: [], result: "", selected_tags: [])}
+    {:ok, assign(socket, S.default)}
   end
 
   def render(assigns) do
@@ -17,13 +18,13 @@ defmodule TamydaWeb.TamydaLive do
     if String.length(q) < 2 do
       {:noreply, assign(socket, query: q, result: "…", matches: [])}
     else
-      {:noreply, assign(socket, matches: Tag.find_tag_text(q))}
+      {:noreply, assign(socket, matches: Tag.find_tags(q))}
     end
   end
 
-  def handle_event("search", %{"q" => q}, %{assigns: %{selected_tags: selected_tags}} = socket) do
-    IO.inspect {:search, q, selected_tags}
-    tags = Tag.find_tag_text(q) ++ selected_tags |> Enum.uniq
+  def handle_event("search", %{"q" => q, "desc" => desc}, %{assigns: %{selected_tags: selected_tags}} = socket) do
+    IO.inspect {:search, q, desc, socket.assigns}
+    tags = Tag.find_tags(q) ++ selected_tags |> Enum.uniq
     result = ""
     {:noreply, assign(socket, query: q, result: result, matches: [], selected_tags: tags)}
   end
