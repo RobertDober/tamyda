@@ -10,14 +10,20 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+
 alias Tamyda.Repo
 alias Tamyda.Data.Tag
-
-Repo.insert! %Tag{tag: "elixir"}
-Repo.insert! %Tag{tag: "phoenix"}
-Repo.insert! %Tag{tag: "dev"}
-Repo.insert! %Tag{tag: "git"}
-Repo.insert! %Tag{tag: "mix"}
-Repo.insert! %Tag{tag: "zsh"}
-Repo.insert! %Tag{tag: "tmux"}
-Repo.insert! %Tag{tag: "vim"}
+insert = fn tag -> 
+  case Repo.insert(Tag.changeset(tag: tag), log: false) do
+    {:ok, _} -> IO.puts("tag #{tag} inserted")
+    {:error, %{errors: errors}} -> IO.puts("#{IO.ANSI.bright}#{IO.ANSI.red}***ERROR:#{IO.ANSI.normal} tag=#{tag}#{IO.ANSI.white} #{inspect errors}")
+  end
+end
+insert.("elixir")
+insert.("phoenix")
+insert.("dev")
+insert.("git")
+insert.("mix")
+insert.("zsh")
+insert.("tmux")
+insert.("vim")
