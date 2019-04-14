@@ -3,13 +3,13 @@ defmodule Tamyda.Repo.Migrations.CreateResources do
 
   def change do
     create table(:resources) do
-      add :short, :string
-      add :long, :text
+      add :short_desc, :string, null: false
       add :url, :string
+      add :long_desc, :text
 
       timestamps()
     end
 
-    create index(:resources, [:short])
+    create index(:resources, [:short_desc])
   end
 end
