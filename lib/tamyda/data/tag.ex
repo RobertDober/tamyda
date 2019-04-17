@@ -2,6 +2,8 @@ defmodule Tamyda.Data.Tag do
   use Ecto.Schema
   import Ecto.Changeset
 
+  use Tamyda.Repo.Tools
+
   schema "tags" do
     field :tag, :string
 

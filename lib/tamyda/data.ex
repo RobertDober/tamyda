@@ -215,4 +215,100 @@ defmodule Tamyda.Data do
   def change_resource(%Resource{} = resource) do
     Resource.changeset(resource, %{})
   end
+
+  alias Tamyda.Data.ResourceTag
+
+  @doc """
+  Returns the list of resource_tags.
+
+  ## Examples
+
+      iex> list_resource_tags()
+      [%ResourceTag{}, ...]
+
+  """
+  def list_resource_tags do
+    Repo.all(ResourceTag)
+  end
+
+  @doc """
+  Gets a single resource_tag.
+
+  Raises `Ecto.NoResultsError` if the Resource tag does not exist.
+
+  ## Examples
+
+      iex> get_resource_tag!(123)
+      %ResourceTag{}
+
+      iex> get_resource_tag!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_resource_tag!(id), do: Repo.get!(ResourceTag, id)
+
+  @doc """
+  Creates a resource_tag.
+
+  ## Examples
+
+      iex> create_resource_tag(%{field: value})
+      {:ok, %ResourceTag{}}
+
+      iex> create_resource_tag(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_resource_tag(attrs \\ %{}) do
+    %ResourceTag{}
+    |> ResourceTag.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a resource_tag.
+
+  ## Examples
+
+      iex> update_resource_tag(resource_tag, %{field: new_value})
+      {:ok, %ResourceTag{}}
+
+      iex> update_resource_tag(resource_tag, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_resource_tag(%ResourceTag{} = resource_tag, attrs) do
+    resource_tag
+    |> ResourceTag.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a ResourceTag.
+
+  ## Examples
+
+      iex> delete_resource_tag(resource_tag)
+      {:ok, %ResourceTag{}}
+
+      iex> delete_resource_tag(resource_tag)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_resource_tag(%ResourceTag{} = resource_tag) do
+    Repo.delete(resource_tag)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking resource_tag changes.
+
+  ## Examples
+
+      iex> change_resource_tag(resource_tag)
+      %Ecto.Changeset{source: %ResourceTag{}}
+
+  """
+  def change_resource_tag(%ResourceTag{} = resource_tag) do
+    ResourceTag.changeset(resource_tag, %{})
+  end
 end

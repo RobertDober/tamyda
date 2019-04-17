@@ -2,6 +2,8 @@ defmodule Tamyda.Data.Resource do
   use Ecto.Schema
   import Ecto.Changeset
 
+  use Tamyda.Repo.Tools
+
   schema "resources" do
     field :long_desc, :string
     field :short_desc, :string
@@ -16,4 +18,5 @@ defmodule Tamyda.Data.Resource do
     |> cast(attrs, [:short_desc, :url, :long_desc])
     |> validate_required([:short_desc])
   end
+
 end
