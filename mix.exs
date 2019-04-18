@@ -7,7 +7,7 @@ defmodule Tamyda.MixProject do
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix, :gettext | Mix.compilers()],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -25,7 +25,8 @@ defmodule Tamyda.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "tasks", "test/support"]
+  defp elixirc_paths(:dev), do: ["lib", "tasks"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
