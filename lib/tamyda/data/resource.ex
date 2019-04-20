@@ -32,4 +32,11 @@ defmodule Tamyda.Data.Resource do
     tags
     |> Enum.each( &ResourceTag.add_tag_to_resource(Tag.find_or_create(&1), resource_id) )
   end
+
+  @doc """
+  Return all resources that have all of tags in the taglist
+  """
+  def with_tags(taglist) do
+  end
+
 end

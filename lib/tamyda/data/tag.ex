@@ -40,7 +40,7 @@ defmodule Tamyda.Data.Tag do
     end
   end
 
-  defp find_tag(tag) do
+  def find_tag(tag) do
     from( t in __MODULE__,
       where: ilike(t.tag, ^tag),
       select: t.id
